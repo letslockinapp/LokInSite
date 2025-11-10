@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git -C /Users/peyo/Developer/LokIn/LokInSite log --oneline --all)",
+      "Bash(bun create:*)",
+      "Bash(npx create-next-app:*)",
+      "Bash(npm run build:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}
