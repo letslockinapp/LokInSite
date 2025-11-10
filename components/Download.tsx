@@ -76,7 +76,7 @@ async function handleDownload(platform: Platform, event: React.MouseEvent) {
         const blob = await response.blob();
         
         // Show file picker to let user choose save location
-        const fileHandle = await (window as unknown as { showSaveFilePicker: (options: unknown) => Promise<unknown> }).showSaveFilePicker({
+        const fileHandle = await (window as unknown as { showSaveFilePicker: (options: unknown) => Promise<{ createWritable: () => Promise<{ write: (data: Blob) => Promise<void>; close: () => Promise<void> }> }> }).showSaveFilePicker({
           suggestedName: platformData.filename,
           types: [{
             description: `${platformData.name} Installer`,
@@ -85,7 +85,7 @@ async function handleDownload(platform: Platform, event: React.MouseEvent) {
             },
           }],
         });
-        
+
         // Write the file to the selected location
         const writable = await fileHandle.createWritable();
         await writable.write(blob);
