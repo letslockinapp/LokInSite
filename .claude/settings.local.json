@@ -4,7 +4,14 @@
       "Bash(git -C /Users/peyo/Developer/LokIn/LokInSite log --oneline --all)",
       "Bash(bun create:*)",
       "Bash(npx create-next-app:*)",
-      "Bash(npm run build:*)"
+      "Bash(npm run build:*)",
+      "Bash(git add:*)",
+      "Bash(git push:*)",
+      "WebFetch(domain:err.sh)",
+      "WebFetch(domain:github.com)",
+      "Bash(cat:*)",
+      "Bash(git ls-tree:*)",
+      "Bash(git commit:*)"
     ],
     "deny": [],
     "ask": []
