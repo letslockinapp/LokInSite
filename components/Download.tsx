@@ -18,28 +18,47 @@ function detectPlatform(): Platform {
   return 'unknown';
 }
 
+// Platform Logo Components
+const WindowsLogo = ({ className = "w-8 h-8" }: { className?: string }) => (
+  <svg className={className} viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0 3.449L9.75 2.1v9.451H0m10.949-9.602L24 0v11.4H10.949M0 12.6h9.75v9.451L0 20.699M10.949 12.6H24V24l-13.051-1.35"/>
+  </svg>
+);
+
+const AppleLogo = ({ className = "w-8 h-8" }: { className?: string }) => (
+  <svg className={className} viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+    <path d="M17.05 20.28c-.98.95-2.05.88-3.08.4-1.09-.5-2.08-.48-3.24 0-1.44.62-2.2.44-3.06-.4C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.38 5.98.48 7.13-.57 1.5-1.31 2.99-2.54 4.09l.01-.01zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z"/>
+  </svg>
+);
+
+const LinuxLogo = ({ className = "w-8 h-8" }: { className?: string }) => (
+  <svg className={className} viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+    <path d="M12.504 0c-.155 0-.315.008-.48.021-4.226.333-3.105 4.807-3.17 6.298-.076 1.092-.3 1.953-1.05 3.02-.885 1.051-2.127 2.75-2.716 4.521-.278.832-.41 1.684-.287 2.489a.424.424 0 00-.11.135c-.26.268-.45.6-.663.896-.12.169-.257.33-.35.51-.1.193-.17.4-.134 6.298.333 4.226 4.807 3.105 6.298 3.17 1.878.13 3.318.044 4.52 1.05 1.052.885 2.751 2.127 4.522 2.716.832.278 1.684.41 2.489.287.135.11.135.11.135.11.268.26.6.45.896.663.169.12.33.257.51.35.193.1.4.17 6.298.134 4.226-.333 3.105-4.807 3.17-6.298.13-1.878.044-3.318-1.05-4.52-.885-1.052-2.127-2.751-2.716-4.522-.278-.832-.41-1.684-.287-2.489a.424.424 0 00-.11-.135c-.26-.268-.45-.6-.663-.896-.12-.169-.257-.33-.35-.51-.1-.193-.17-.4-.134-6.298-.333-4.226-4.807-3.105-6.298-3.17-.832-.278-1.684-.41-2.489-.287a.424.424 0 00-.135-.11c-.268-.26-.6-.45-.896-.663-.169-.12-.33-.257-.51-.35-.193-.1-.4-.17-6.298-.134zm.854 2.166c.12-.01.24-.014.36-.016 3.905.12 4.283 4.966 4.283 5.014 0 .1.016.198.05.29.05.14.12.27.22.38.15.17.35.3.58.38.26.09.54.13.82.13.28 0 .56-.04.82-.13.23-.08.43-.21.58-.38.1-.11.17-.24.22-.38.03-.092.05-.19.05-.29 0-.048.378-4.894 4.283-5.014.12.002.24.006.36.016 2.4.2 2.4 3.2 2.4 3.2v9.268c0 .7-.58 1.28-1.28 1.28-.7 0-1.28-.58-1.28-1.28V5.566c0-.048-.378-4.894-4.283-5.014-.12-.002-.24-.006-.36-.016-2.4-.2-2.4-3.2-2.4-3.2v9.268c0 .7-.58 1.28-1.28 1.28-.7 0-1.28-.58-1.28-1.28V5.366c0 0 0-2.8-2.4-3.2z"/>
+  </svg>
+);
+
 const platformInfo = {
   windows: {
     name: 'Windows',
-    icon: '🪟',
+    Icon: WindowsLogo,
     url: process.env.NEXT_PUBLIC_DOWNLOAD_WINDOWS || '#',
     filename: 'LokIn-Setup-Windows.exe',
   },
   macos: {
     name: 'macOS',
-    icon: '🍎',
+    Icon: AppleLogo,
     url: process.env.NEXT_PUBLIC_DOWNLOAD_MACOS || '#',
     filename: 'LokIn-Setup-macOS.dmg',
   },
   linux: {
     name: 'Linux',
-    icon: '🐧',
+    Icon: LinuxLogo,
     url: process.env.NEXT_PUBLIC_DOWNLOAD_LINUX || '#',
     filename: 'LokIn-Setup-Linux.AppImage',
   },
   unknown: {
     name: 'Desktop',
-    icon: '💻',
+    Icon: () => <span className="text-4xl">💻</span>,
     url: '#',
     filename: 'LokIn-Setup.exe',
   },
@@ -169,7 +188,7 @@ export default function Download() {
             className="block bg-gradient-to-r from-purple-600 to-pink-600 text-white px-12 py-6 rounded-2xl text-2xl font-bold shadow-2xl hover:shadow-purple-500/50 transition-shadow mx-auto max-w-md text-center w-full cursor-pointer"
           >
             <div className="flex items-center justify-center gap-3">
-              <span className="text-4xl">{currentPlatform.icon}</span>
+              <currentPlatform.Icon className="w-8 h-8" />
               <span>Download for {currentPlatform.name}</span>
             </div>
           </motion.button>
@@ -193,9 +212,9 @@ export default function Download() {
                   onClick={(e) => handleDownload(key as Platform, e)}
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  className="bg-white text-purple-600 px-6 py-3 rounded-xl font-semibold shadow-lg hover:shadow-xl transition-shadow border-2 border-purple-200 cursor-pointer"
+                  className="bg-white text-purple-600 px-6 py-3 rounded-xl font-semibold shadow-lg hover:shadow-xl transition-shadow border-2 border-purple-200 cursor-pointer flex items-center"
                 >
-                  <span className="mr-2">{info.icon}</span>
+                  <info.Icon className="w-5 h-5 mr-2" />
                   {info.name}
                 </motion.button>
               ))}
