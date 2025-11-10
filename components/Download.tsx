@@ -23,23 +23,104 @@ const platformInfo = {
     name: 'Windows',
     icon: '🪟',
     url: process.env.NEXT_PUBLIC_DOWNLOAD_WINDOWS || '#',
+    filename: 'LokIn-Setup-Windows.exe',
   },
   macos: {
     name: 'macOS',
     icon: '🍎',
     url: process.env.NEXT_PUBLIC_DOWNLOAD_MACOS || '#',
+    filename: 'LokIn-Setup-macOS.dmg',
   },
   linux: {
     name: 'Linux',
     icon: '🐧',
     url: process.env.NEXT_PUBLIC_DOWNLOAD_LINUX || '#',
+    filename: 'LokIn-Setup-Linux.AppImage',
   },
   unknown: {
     name: 'Desktop',
     icon: '💻',
     url: '#',
+    filename: 'LokIn-Setup.exe',
   },
 };
+
+// Check if File System Access API is supported
+function isFileSystemAccessSupported(): boolean {
+  return 'showSaveFilePicker' in window;
+}
+
+// Download handler function
+async function handleDownload(platform: Platform, event: React.MouseEvent) {
+  event.preventDefault();
+  
+  const platformData = platformInfo[platform];
+  const downloadUrl = platformData.url;
+  
+  // If no URL is set, return early
+  if (!downloadUrl || downloadUrl === '#') {
+    console.warn(`Download URL not set for ${platform}`);
+    return;
+  }
+
+  try {
+    // Try to use File System Access API if available (Chrome, Edge, etc.)
+    if (isFileSystemAccessSupported()) {
+      try {
+        // Fetch the file
+        const response = await fetch(downloadUrl);
+        if (!response.ok) {
+          throw new Error(`Failed to fetch file: ${response.statusText}`);
+        }
+        
+        const blob = await response.blob();
+        
+        // Show file picker to let user choose save location
+        const fileHandle = await (window as any).showSaveFilePicker({
+          suggestedName: platformData.filename,
+          types: [{
+            description: `${platformData.name} Installer`,
+            accept: {
+              'application/octet-stream': [`.${platformData.filename.split('.').pop()}`],
+            },
+          }],
+        });
+        
+        // Write the file to the selected location
+        const writable = await fileHandle.createWritable();
+        await writable.write(blob);
+        await writable.close();
+        
+        console.log('File saved successfully');
+      } catch (error: any) {
+        // If user cancels the file picker, just return
+        if (error.name === 'AbortError') {
+          return;
+        }
+        // If File System Access API fails, fall back to regular download
+        console.warn('File System Access API failed, falling back to regular download:', error);
+        fallbackDownload(downloadUrl, platformData.filename);
+      }
+    } else {
+      // Fallback for browsers that don't support File System Access API
+      fallbackDownload(downloadUrl, platformData.filename);
+    }
+  } catch (error) {
+    console.error('Download failed:', error);
+    // Fallback to regular download on any error
+    fallbackDownload(downloadUrl, platformData.filename);
+  }
+}
+
+// Fallback download function for browsers without File System Access API
+function fallbackDownload(url: string, filename: string) {
+  const link = document.createElement('a');
+  link.href = url;
+  link.download = filename;
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+}
 
 export default function Download() {
   const ref = useRef(null);
@@ -81,17 +162,17 @@ export default function Download() {
           transition={{ delay: 0.2, type: "spring", stiffness: 100 }}
           className="mb-8"
         >
-          <motion.a
-            href={currentPlatform.url}
+          <motion.button
+            onClick={(e) => handleDownload(platform, e)}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className="block bg-gradient-to-r from-purple-600 to-pink-600 text-white px-12 py-6 rounded-2xl text-2xl font-bold shadow-2xl hover:shadow-purple-500/50 transition-shadow mx-auto max-w-md text-center"
+            className="block bg-gradient-to-r from-purple-600 to-pink-600 text-white px-12 py-6 rounded-2xl text-2xl font-bold shadow-2xl hover:shadow-purple-500/50 transition-shadow mx-auto max-w-md text-center w-full cursor-pointer"
           >
             <div className="flex items-center justify-center gap-3">
               <span className="text-4xl">{currentPlatform.icon}</span>
               <span>Download for {currentPlatform.name}</span>
             </div>
-          </motion.a>
+          </motion.button>
         </motion.div>
 
         {/* Other Platforms */}
@@ -107,16 +188,16 @@ export default function Download() {
             </p>
             <div className="flex flex-wrap justify-center gap-4">
               {otherPlatforms.map(([key, info]) => (
-                <motion.a
+                <motion.button
                   key={key}
-                  href={info.url}
+                  onClick={(e) => handleDownload(key as Platform, e)}
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  className="bg-white text-purple-600 px-6 py-3 rounded-xl font-semibold shadow-lg hover:shadow-xl transition-shadow border-2 border-purple-200"
+                  className="bg-white text-purple-600 px-6 py-3 rounded-xl font-semibold shadow-lg hover:shadow-xl transition-shadow border-2 border-purple-200 cursor-pointer"
                 >
                   <span className="mr-2">{info.icon}</span>
                   {info.name}
-                </motion.a>
+                </motion.button>
               ))}
             </div>
           </motion.div>
