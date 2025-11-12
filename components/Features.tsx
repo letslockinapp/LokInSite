@@ -71,7 +71,7 @@ function FeatureCard({ feature, index }: { feature: typeof features[0]; index: n
 
 export default function Features() {
   return (
-    <section id="features" className="py-20 px-4 bg-gray-900">
+    <section id="features" className="py-20 px-4 bg-transparent">
       <div className="max-w-6xl mx-auto">
         <motion.div
           initial={{ y: 30, opacity: 0 }}

@@ -158,7 +158,7 @@ export default function Download() {
   const iosUrl = process.env.NEXT_PUBLIC_DOWNLOAD_IOS || '#';
 
   return (
-    <section id="download" ref={ref} className="py-20 px-4 bg-gray-900">
+    <section id="download" ref={ref} className="py-20 px-4 bg-transparent">
       <div className="max-w-4xl mx-auto">
         <motion.div
           initial={{ y: 30, opacity: 0 }}

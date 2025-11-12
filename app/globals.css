@@ -8,11 +8,44 @@
 }
 
 body {
+  position: relative;
   color: var(--foreground);
-  background: var(--background);
+  background-color: #0a0a0a; /* Fallback background */
   font-family: "Input Mono", monospace;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: linear-gradient(135deg, #1a1a1a, #2a2a2a, #7e22ce);
+  background-size: 400% 400%;
+  animation: gradientAnimation 10s ease infinite;
+  filter: blur(80px); /* Increased blur */
+  z-index: -1;
+  transform: scale(1.2);
+}
+
+@keyframes gradientAnimation {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+main {
+  position: relative;
+  z-index: 1;
 }
 
 @layer utilities {

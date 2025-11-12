@@ -37,7 +37,7 @@ const ScareScreens = () => {
   }, []);
 
   return (
-    <section id="scarescreens" className="py-20 bg-black text-white">
+    <section id="scarescreens" className="py-20 bg-transparent text-white">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <h2 className="text-4xl font-bold mb-8 text-purple-500">The Truth About Screen Time</h2>
         <div className="relative h-48">
