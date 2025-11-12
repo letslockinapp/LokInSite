@@ -122,7 +122,7 @@ export default function Hero() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1 }}
-          className="absolute bottom-10 left-1/2 transform -translate-x-1/2"
+          className="mt-12 flex justify-center"
         >
           <motion.div
             animate={{ y: [0, 10, 0] }}
