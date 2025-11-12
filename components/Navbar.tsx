@@ -17,7 +17,7 @@ export default function Navbar() {
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ type: "spring", stiffness: 100, damping: 20 }}
-      className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-md shadow-sm"
+      className="fixed top-0 left-0 right-0 z-50 bg-gray-950/50 backdrop-blur-md rounded-2xl shadow-lg"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
@@ -48,7 +48,7 @@ export default function Navbar() {
           <div className="flex items-center gap-8">
             <motion.button
               onClick={() => scrollToSection('download')}
-              className="text-gray-700 hover:text-purple-600 font-medium transition-colors"
+              className="text-gray-300 hover:text-purple-600 font-medium transition-colors"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
@@ -57,7 +57,7 @@ export default function Navbar() {
 
             <Link href="/blog">
               <motion.span
-                className="text-gray-700 hover:text-purple-600 font-medium transition-colors cursor-pointer"
+                className="text-gray-300 hover:text-purple-600 font-medium transition-colors cursor-pointer"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
@@ -67,7 +67,7 @@ export default function Navbar() {
 
             <motion.button
               onClick={() => scrollToSection('features')}
-              className="text-gray-700 hover:text-purple-600 font-medium transition-colors"
+              className="text-gray-300 hover:text-purple-600 font-medium transition-colors"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >

@@ -9,7 +9,7 @@ export default function Screenshots() {
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section ref={ref} className="py-20 px-4 bg-white">
+    <section ref={ref} className="py-20 px-4 bg-gray-950">
       <div className="max-w-6xl mx-auto">
         <motion.div
           initial={{ y: 30, opacity: 0 }}
@@ -17,10 +17,10 @@ export default function Screenshots() {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <h2 className="text-5xl font-bold mb-4 bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">
+          <h2 className="text-5xl font-bold mb-4 text-white">
             See it in action
           </h2>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+          <p className="text-xl text-gray-400 max-w-2xl mx-auto">
             Clean. Simple. Beautiful. Everything you need, nothing you don&rsquo;t.
           </p>
         </motion.div>
@@ -32,13 +32,13 @@ export default function Screenshots() {
           transition={{ delay: 0.2, type: "spring", stiffness: 50 }}
           className="mb-20"
         >
-          <h3 className="text-2xl font-semibold mb-6 text-center text-gray-800">
+          <h3 className="text-2xl font-semibold mb-6 text-center text-gray-200">
             Desktop App - Your Focus Fortress
           </h3>
           <motion.div
             whileHover={{ scale: 1.02, rotateY: 5 }}
             transition={{ type: "spring", stiffness: 300 }}
-            className="relative bg-gradient-to-br from-purple-400 via-purple-500 to-indigo-600 rounded-2xl p-1 shadow-2xl mx-auto max-w-4xl"
+            className="relative bg-gray-700 rounded-2xl p-1 shadow-2xl mx-auto max-w-4xl"
           >
             <div className="bg-gray-900 rounded-xl p-8 relative overflow-hidden">
               {/* Window controls */}
@@ -90,13 +90,13 @@ export default function Screenshots() {
           animate={isInView ? { x: 0, opacity: 1 } : { x: 100, opacity: 0 }}
           transition={{ delay: 0.4, type: "spring", stiffness: 50 }}
         >
-          <h3 className="text-2xl font-semibold mb-6 text-center text-gray-800">
+          <h3 className="text-2xl font-semibold mb-6 text-center text-gray-200">
             Mobile App - Lock in on the go
           </h3>
           <motion.div
             whileHover={{ scale: 1.05, rotateZ: -2 }}
             transition={{ type: "spring", stiffness: 300 }}
-            className="relative bg-gradient-to-br from-pink-400 via-purple-500 to-purple-600 rounded-[3rem] p-1 shadow-2xl mx-auto max-w-sm"
+            className="relative bg-gray-700 rounded-[3rem] p-1 shadow-2xl mx-auto max-w-sm"
           >
             <div className="bg-gray-900 rounded-[2.5rem] p-6 relative overflow-hidden">
               {/* Phone notch */}
@@ -111,7 +111,7 @@ export default function Screenshots() {
 
                 <div className="relative h-4 bg-purple-900/30 rounded-full overflow-hidden">
                   <motion.div
-                    className="absolute top-0 left-0 h-full bg-gradient-to-r from-purple-400 to-pink-500 rounded-full"
+                    className="absolute top-0 left-0 h-full bg-purple-600 rounded-full"
                     initial={{ width: "0%" }}
                     animate={{ width: "60%" }}
                     transition={{ duration: 1, delay: 0.5 }}
@@ -139,7 +139,7 @@ export default function Screenshots() {
                 </div>
 
                 <div className="text-center pt-4">
-                  <div className="inline-block bg-gradient-to-r from-purple-500 to-pink-500 text-white px-8 py-3 rounded-full font-semibold text-sm">
+                  <div className="inline-block bg-purple-600 text-white px-8 py-3 rounded-full font-semibold text-sm">
                     STAY LOCKED IN
                   </div>
                 </div>

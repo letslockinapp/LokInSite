@@ -9,19 +9,16 @@ const features = [
     title: 'Focus Timer',
     description: 'Pomodoro? Custom sessions? We got you. Lock in for 25 mins or go full beast mode for hours.',
     emoji: '⏰',
-    gradient: 'from-purple-400 to-purple-600',
   },
   {
     title: 'Distraction Blocking',
     description: 'TikTok? Instagram? Twitter? Not today. Block those time-wasters and actually get stuff done.',
     emoji: '🚫',
-    gradient: 'from-pink-400 to-pink-600',
   },
   {
     title: 'Goal Tracking',
     description: 'Build streaks. Track wins. Watch yourself become that person who actually does what they say.',
     emoji: '🎯',
-    gradient: 'from-indigo-400 to-indigo-600',
   },
 ];
 
@@ -45,10 +42,8 @@ function FeatureCard({ feature, index }: { feature: typeof features[0]; index: n
         rotate: [-1, 1, -1, 0],
         transition: { duration: 0.3 }
       }}
-      className="relative bg-white rounded-3xl p-8 shadow-xl hover:shadow-2xl transition-shadow"
+      className="relative bg-gray-800 rounded-xl p-8 shadow-xl hover:shadow-2xl transition-shadow border border-gray-700"
     >
-      <div className={`absolute top-0 left-0 w-full h-2 rounded-t-3xl bg-gradient-to-r ${feature.gradient}`} />
-
       <motion.div
         className="text-6xl mb-4"
         animate={{
@@ -63,11 +58,11 @@ function FeatureCard({ feature, index }: { feature: typeof features[0]; index: n
         {feature.emoji}
       </motion.div>
 
-      <h3 className="text-2xl font-bold mb-3 text-gray-900">
+      <h3 className="text-2xl font-bold mb-3 text-gray-100">
         {feature.title}
       </h3>
 
-      <p className="text-gray-600 leading-relaxed">
+      <p className="text-gray-400 leading-relaxed">
         {feature.description}
       </p>
     </motion.div>
@@ -76,7 +71,7 @@ function FeatureCard({ feature, index }: { feature: typeof features[0]; index: n
 
 export default function Features() {
   return (
-    <section id="features" className="py-20 px-4 bg-gray-50">
+    <section id="features" className="py-20 px-4 bg-gray-900">
       <div className="max-w-6xl mx-auto">
         <motion.div
           initial={{ y: 30, opacity: 0 }}
@@ -85,10 +80,10 @@ export default function Features() {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <h2 className="text-5xl font-bold mb-4 bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
+          <h2 className="text-5xl font-bold mb-4 text-white">
             Features that hit different
           </h2>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+          <p className="text-xl text-gray-400 max-w-2xl mx-auto">
             Everything you need to stop procrastinating and start absolutely crushing it
           </p>
         </motion.div>

@@ -158,7 +158,7 @@ export default function Download() {
   const iosUrl = process.env.NEXT_PUBLIC_DOWNLOAD_IOS || '#';
 
   return (
-    <section id="download" ref={ref} className="py-20 px-4 bg-gradient-to-br from-purple-100 via-pink-50 to-purple-50">
+    <section id="download" ref={ref} className="py-20 px-4 bg-gray-900">
       <div className="max-w-4xl mx-auto">
         <motion.div
           initial={{ y: 30, opacity: 0 }}
@@ -166,10 +166,10 @@ export default function Download() {
           transition={{ duration: 0.6 }}
           className="text-center mb-12"
         >
-          <h2 className="text-5xl font-bold mb-4 bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
+          <h2 className="text-5xl font-bold mb-4 text-white">
             Ready to lock in?
           </h2>
-          <p className="text-xl text-gray-600">
+          <p className="text-xl text-gray-400">
             Download LokIn and start crushing your goals today. No cap.
           </p>
         </motion.div>
@@ -185,7 +185,7 @@ export default function Download() {
             onClick={(e) => handleDownload(platform, e)}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className="block bg-gradient-to-r from-purple-600 to-pink-600 text-white px-12 py-6 rounded-2xl text-2xl font-bold shadow-2xl hover:shadow-purple-500/50 transition-shadow mx-auto max-w-md text-center w-full cursor-pointer"
+            className="block bg-purple-600 text-white px-12 py-6 rounded-2xl text-2xl font-bold shadow-2xl hover:shadow-purple-500/50 transition-shadow mx-auto max-w-md text-center w-full cursor-pointer"
           >
             <div className="flex items-center justify-center gap-3">
               <currentPlatform.Icon className="w-8 h-8" />
@@ -202,7 +202,7 @@ export default function Download() {
             transition={{ delay: 0.4 }}
             className="mb-12"
           >
-            <p className="text-center text-gray-600 mb-4 text-sm">
+            <p className="text-center text-gray-400 mb-4 text-sm">
               Or download for:
             </p>
             <div className="flex flex-wrap justify-center gap-4">
@@ -212,7 +212,7 @@ export default function Download() {
                   onClick={(e) => handleDownload(key as Platform, e)}
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  className="bg-white text-purple-600 px-6 py-3 rounded-xl font-semibold shadow-lg hover:shadow-xl transition-shadow border-2 border-purple-200 cursor-pointer flex items-center"
+                  className="bg-gray-800 text-purple-400 px-6 py-3 rounded-xl font-semibold shadow-lg hover:shadow-xl transition-shadow border-2 border-purple-500 cursor-pointer flex items-center"
                 >
                   <info.Icon className="w-5 h-5 mr-2" />
                   {info.name}
@@ -229,15 +229,15 @@ export default function Download() {
           transition={{ delay: 0.6 }}
           className="text-center"
         >
-          <div className="inline-block bg-white rounded-2xl p-8 shadow-xl">
-            <p className="text-lg font-semibold text-gray-800 mb-4">
+          <div className="inline-block bg-gray-800 rounded-2xl p-8 shadow-xl">
+            <p className="text-lg font-semibold text-gray-200 mb-4">
               Lock in on mobile too
             </p>
             <motion.a
               href={iosUrl}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="inline-flex items-center gap-3 bg-black text-white px-8 py-4 rounded-xl font-semibold shadow-lg hover:shadow-2xl transition-shadow"
+              className="inline-flex items-center gap-3 bg-gray-700 text-white px-8 py-4 rounded-xl font-semibold shadow-lg hover:shadow-2xl transition-shadow"
             >
               <span className="text-2xl">📱</span>
               <div className="text-left">
@@ -259,16 +259,16 @@ export default function Download() {
           className="mt-16 grid grid-cols-3 gap-6 max-w-2xl mx-auto"
         >
           <div className="text-center">
-            <div className="text-4xl font-bold text-purple-600 mb-2">24/7</div>
-            <div className="text-sm text-gray-600">Available to help you lock in</div>
+            <div className="text-4xl font-bold text-purple-500 mb-2">24/7</div>
+            <div className="text-sm text-gray-400">Available to help you lock in</div>
           </div>
           <div className="text-center">
-            <div className="text-4xl font-bold text-pink-600 mb-2">100%</div>
-            <div className="text-sm text-gray-600">Free to download</div>
+            <div className="text-4xl font-bold text-purple-500 mb-2">100%</div>
+            <div className="text-sm text-gray-400">Free to download</div>
           </div>
           <div className="text-center">
-            <div className="text-4xl font-bold text-indigo-600 mb-2">0</div>
-            <div className="text-sm text-gray-600">Excuses accepted</div>
+            <div className="text-4xl font-bold text-purple-500 mb-2">0</div>
+            <div className="text-sm text-gray-400">Excuses accepted</div>
           </div>
         </motion.div>
       </div>
