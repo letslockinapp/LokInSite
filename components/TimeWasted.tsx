@@ -31,7 +31,7 @@ const TimeWasted = () => {
             Considering the average person spends around <span className="text-purple-400 font-bold">{hoursPerDay} hours</span> on their phone each day...
           </p>
           <p className="text-3xl font-bold text-red-400">
-            That's approximately <span className="text-red-500">{totalHoursPerYear} hours</span> or <span className="text-red-500">{totalDaysPerYear.toFixed(1)} days</span> wasted per person each year!
+            That&apos;s approximately <span className="text-red-500">{totalHoursPerYear} hours</span> or <span className="text-red-500">{totalDaysPerYear.toFixed(1)} days</span> wasted per person each year!
           </p>
           <p className="text-lg mt-4 text-gray-300">
             Imagine what you could achieve with an extra {totalDaysPerYear.toFixed(1)} days a year.

@@ -26,7 +26,7 @@ export default function Hero() {
             transition={{ delay: 0.4 }}
             className="text-xl md:text-2xl text-gray-300 mb-12 max-w-2xl lg:max-w-none mx-auto lg:mx-0"
           >
-            Focus on what matters. Not what's meaningless.
+            Focus on what matters. Not what&apos;s meaningless.
           </motion.p>
 
           <motion.div

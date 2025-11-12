@@ -50,7 +50,7 @@ const ScareScreens = () => {
               transition={{ duration: 0.5 }}
               className="absolute inset-0 flex flex-col justify-center items-center"
             >
-              <p className="text-2xl font-semibold">"{facts[index].text}"</p>
+              <p className="text-2xl font-semibold">&quot;{facts[index].text}&quot;</p>
               <p className="text-md text-gray-400 mt-4">- {facts[index].source}</p>
             </motion.div>
           </AnimatePresence>
