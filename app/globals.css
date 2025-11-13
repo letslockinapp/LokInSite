@@ -58,6 +58,17 @@ html {
 }
 
 .hero-background {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  border-radius: 1.5rem; /* rounded-3xl equivalent */
+}
+
+.hero-background::before {
+  content: '';
+  position: absolute;
+  inset: -40px; /* Expand to cover blur edges */
   background: linear-gradient(135deg, #1a1a1a, #2a2a2a, #7e22ce);
   background-size: 400% 400%;
   animation: gradientAnimation 10s ease infinite;

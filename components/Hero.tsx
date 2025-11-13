@@ -5,7 +5,7 @@ import { motion } from 'framer-motion';
 
 export default function Hero() {
   return (
-    <section className="relative z-0 min-h-screen flex items-center justify-center overflow-hidden rounded-3xl">
+    <section className="relative z-0 min-h-screen flex items-center justify-center overflow-hidden">
       <div className="absolute inset-0 -z-10 hero-background" />
       {/* Main content */}
       <div className="relative z-10 flex flex-col lg:flex-row items-center justify-between px-4 max-w-7xl mx-auto py-20">
@@ -17,7 +17,7 @@ export default function Hero() {
             transition={{ delay: 0.2 }}
             className="text-7xl md:text-8xl font-bold mb-6 text-white"
           >
-            Time to Lock In.
+            Time to Lock In<span className="text-purple-600">.</span>
           </motion.h1>
 
           <motion.p
@@ -62,7 +62,7 @@ export default function Hero() {
           className="lg:w-1/2 flex justify-center lg:justify-end"
         >
           <Image
-            src="/iphoneVer.png" // Placeholder for iPhone image
+            src="/iphoneVer.png"
             alt="iPhone Mockup"
             width={300}
             height={600}

@@ -41,19 +41,19 @@ const platformInfo = {
   windows: {
     name: 'Windows',
     Icon: WindowsLogo,
-    url: process.env.NEXT_PUBLIC_DOWNLOAD_WINDOWS || '#',
+    url: "https://github.com/letslockinapp/download/releases/download/public/LokinWindowsARM.exe",
     filename: 'LokIn-Setup-Windows.exe',
   },
   macos: {
     name: 'macOS',
     Icon: AppleLogo,
-    url: process.env.NEXT_PUBLIC_DOWNLOAD_MACOS || '#',
+    url: "https://github.com/letslockinapp/download/releases/download/public/LokinMac.dmg",
     filename: 'LokIn-Setup-macOS.dmg',
   },
   linux: {
     name: 'Linux',
     Icon: LinuxLogo,
-    url: process.env.NEXT_PUBLIC_DOWNLOAD_LINUX || '#',
+    url: "https://github.com/letslockinapp/download/releases/download/public/lokin-arm64-linux.AppImage",
     filename: 'LokIn-Setup-Linux.AppImage',
   },
   unknown: {
@@ -76,69 +76,13 @@ async function handleDownload(platform: Platform, event: React.MouseEvent) {
   const platformData = platformInfo[platform];
   const downloadUrl = platformData.url;
   
-  // If no URL is set, return early
   if (!downloadUrl || downloadUrl === '#') {
     console.warn(`Download URL not set for ${platform}`);
     return;
   }
 
-  try {
-    // Try to use File System Access API if available (Chrome, Edge, etc.)
-    if (isFileSystemAccessSupported()) {
-      try {
-        // Fetch the file
-        const response = await fetch(downloadUrl);
-        if (!response.ok) {
-          throw new Error(`Failed to fetch file: ${response.statusText}`);
-        }
-        
-        const blob = await response.blob();
-        
-        // Show file picker to let user choose save location
-        const fileHandle = await (window as unknown as { showSaveFilePicker: (options: unknown) => Promise<{ createWritable: () => Promise<{ write: (data: Blob) => Promise<void>; close: () => Promise<void> }> }> }).showSaveFilePicker({
-          suggestedName: platformData.filename,
-          types: [{
-            description: `${platformData.name} Installer`,
-            accept: {
-              'application/octet-stream': [`.${platformData.filename.split('.').pop()}`],
-            },
-          }],
-        });
-
-        // Write the file to the selected location
-        const writable = await fileHandle.createWritable();
-        await writable.write(blob);
-        await writable.close();
-        
-        console.log('File saved successfully');
-      } catch (error: unknown) {
-        // If user cancels the file picker, just return
-        if (error instanceof Error && error.name === 'AbortError') {
-          return;
-        }
-        // If File System Access API fails, fall back to regular download
-        console.warn('File System Access API failed, falling back to regular download:', error);
-        fallbackDownload(downloadUrl, platformData.filename);
-      }
-    } else {
-      // Fallback for browsers that don't support File System Access API
-      fallbackDownload(downloadUrl, platformData.filename);
-    }
-  } catch (error) {
-    console.error('Download failed:', error);
-    // Fallback to regular download on any error
-    fallbackDownload(downloadUrl, platformData.filename);
-  }
-}
-
-// Fallback download function for browsers without File System Access API
-function fallbackDownload(url: string, filename: string) {
-  const link = document.createElement('a');
-  link.href = url;
-  link.download = filename;
-  document.body.appendChild(link);
-  link.click();
-  document.body.removeChild(link);
+  // Directly redirect to the download URL
+  window.location.href = downloadUrl;
 }
 
 export default function Download() {
@@ -155,7 +99,7 @@ export default function Download() {
     ([key]) => key !== platform && key !== 'unknown'
   );
 
-  const iosUrl = process.env.NEXT_PUBLIC_DOWNLOAD_IOS || '#';
+  const iosUrl = "https://apps.apple.com/us/app/lokin/id123456789";
 
   return (
     <section id="download" ref={ref} className="py-20 px-4 bg-[#232634]">

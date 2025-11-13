@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion';
 import { useInView } from 'framer-motion';
 import { useRef } from 'react';
+import Image from 'next/image';
 
 const features = [
   {
@@ -88,11 +89,115 @@ export default function Features() {
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-3 gap-8">
-          {features.map((feature, index) => (
-            <FeatureCard key={feature.title} feature={feature} index={index} />
-          ))}
-        </div>
+        {/* Block Screen Showcase - Mobile */}
+        <motion.div
+          initial={{ y: 50, opacity: 0 }}
+          whileInView={{ y: 0, opacity: 1 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.8, type: "spring", stiffness: 80 }}
+        >
+          <div className="flex flex-col md:flex-row items-center gap-12 max-w-5xl mx-auto">
+            {/* Image */}
+            <motion.div
+              whileHover={{ scale: 1.05, rotate: -8 }}
+              transition={{ type: "spring", stiffness: 300 }}
+              className="relative flex-shrink-0"
+              style={{ rotate: -5 }}
+            >
+              <Image
+                src="/blocked.png"
+                alt="LokIn Block Screen - Stay Focused"
+                width={250}
+                height={500}
+                className="rounded-[2rem] shadow-2xl"
+              />
+            </motion.div>
+
+            {/* Text */}
+            <div className="text-center md:text-left">
+              <h3 className="text-4xl font-bold mb-4 text-white">
+                Stay Focused, Stay Locked In
+              </h3>
+              <p className="text-lg text-gray-400">
+                When you need to lock in, we block distractions at the system level. No escape, no excuses.
+              </p>
+            </div>
+          </div>
+        </motion.div>
+
+        {/* Block Screen Showcase - Desktop */}
+        <motion.div
+          initial={{ y: 50, opacity: 0 }}
+          whileInView={{ y: 0, opacity: 1 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.8, type: "spring", stiffness: 80, delay: 0.2 }}
+          className="mt-20"
+        >
+          <div className="flex flex-col md:flex-row-reverse items-center gap-12 max-w-5xl mx-auto">
+            {/* Image */}
+            <motion.div
+              whileHover={{ scale: 1.05, rotate: 3 }}
+              transition={{ type: "spring", stiffness: 300 }}
+              className="relative flex-shrink-0"
+              style={{ rotate: 2 }}
+            >
+              <Image
+                src="/blockedDesktop.png"
+                alt="LokIn Desktop Block Screen"
+                width={400}
+                height={300}
+                className="rounded-xl shadow-2xl"
+              />
+            </motion.div>
+
+            {/* Text */}
+            <div className="text-center md:text-right">
+              <h3 className="text-4xl font-bold mb-4 text-white">
+                Desktop? We Got That Too
+              </h3>
+              <p className="text-lg text-gray-400">
+                Whether you&apos;re on your phone or computer, we&apos;ve got your back. Lock in anywhere, anytime.
+              </p>
+            </div>
+          </div>
+        </motion.div>
+
+        {/* Leaderboard Showcase */}
+        <motion.div
+          initial={{ y: 50, opacity: 0 }}
+          whileInView={{ y: 0, opacity: 1 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.8, type: "spring", stiffness: 80, delay: 0.2 }}
+          className="mt-20"
+        >
+          <div className="flex flex-col md:flex-row items-center gap-12 max-w-5xl mx-auto">
+            {/* Image */}
+            <motion.div
+              whileHover={{ scale: 1.05, rotate: -8 }}
+              transition={{ type: "spring", stiffness: 300 }}
+              className="relative flex-shrink-0"
+              style={{ rotate: -5 }}
+            >
+              <Image
+                src="/leaderboard.png"
+                alt="LokIn Leaderboard - Stay Competitive"
+                width={450}
+                height={900}
+                className="rounded-[2rem] shadow-2xl"
+              />
+            </motion.div>
+
+            {/* Text */}
+            <div className="text-center md:text-left">
+              <h3 className="text-4xl font-bold mb-4 text-white">
+                Stay Competitive
+              </h3>
+              <p className="text-lg text-gray-400">
+                Compete with friends and climb the ranks. Nothing motivates like seeing yourself at the top of the leaderboard.
+              </p>
+            </div>
+          </div>
+        </motion.div>
       </div>
     </section>
   );
