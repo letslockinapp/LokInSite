@@ -55,16 +55,6 @@ export default function Navbar() {
               Downloads
             </motion.button>
 
-            <Link href="/blog">
-              <motion.span
-                className="text-gray-300 hover:text-purple-600 font-medium transition-colors cursor-pointer"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                Blog
-              </motion.span>
-            </Link>
-
             <motion.button
               onClick={() => scrollToSection('features')}
               className="text-gray-300 hover:text-purple-600 font-medium transition-colors"
