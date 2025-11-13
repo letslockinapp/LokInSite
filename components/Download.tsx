@@ -41,7 +41,7 @@ const platformInfo = {
   windows: {
     name: 'Windows',
     Icon: WindowsLogo,
-    url: "https://github.com/letslockinapp/download/releases/download/public/LokinWindowsARM.exe",
+    url: "https://github.com/letslockinapp/download/releases/download/public/LokinWindows.exe",
     filename: 'LokIn-Setup-Windows.exe',
   },
   macos: {
