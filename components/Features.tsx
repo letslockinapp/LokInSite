@@ -82,7 +82,7 @@ export default function Features() {
           className="text-center mb-16"
         >
           <h2 className="text-5xl font-bold mb-4 text-white">
-            Features that hit different
+            Features to keep you focused.
           </h2>
           <p className="text-xl text-gray-400 max-w-2xl mx-auto">
             Everything you need to stop procrastinating and start absolutely crushing it
@@ -153,7 +153,7 @@ export default function Features() {
             {/* Text */}
             <div className="text-center md:text-right">
               <h3 className="text-4xl font-bold mb-4 text-white">
-                Desktop? We Got That Too
+                Cross platform -  Sync your focus across devices
               </h3>
               <p className="text-lg text-gray-400">
                 Whether you&apos;re on your phone or computer, we&apos;ve got your back. Lock in anywhere, anytime.
