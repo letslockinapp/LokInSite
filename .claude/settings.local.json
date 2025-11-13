@@ -11,7 +11,8 @@
       "WebFetch(domain:github.com)",
       "Bash(cat:*)",
       "Bash(git ls-tree:*)",
-      "Bash(git commit:*)"
+      "Bash(git commit:*)",
+      "Bash(mkdir:*)"
     ],
     "deny": [],
     "ask": []

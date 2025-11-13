@@ -52,6 +52,15 @@ export default function Footer() {
                   Download
                 </motion.a>
               </li>
+              <li>
+                <motion.a
+                  href="/privacy"
+                  whileHover={{ x: 5 }}
+                  className="text-gray-400 hover:text-purple-400 transition-colors text-sm"
+                >
+                  Privacy Policy
+                </motion.a>
+              </li>
             </ul>
           </div>
 
