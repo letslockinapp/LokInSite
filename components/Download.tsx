@@ -99,7 +99,7 @@ export default function Download() {
     ([key]) => key !== platform && key !== 'unknown'
   );
 
-  const iosUrl = "https://apps.apple.com/us/app/lokin/id123456789";
+  const iosUrl = "https://testflight.apple.com/join/DUdvbQWB";
 
   return (
     <section id="download" ref={ref} className="py-20 px-4 bg-[#232634]">
