@@ -81,7 +81,10 @@ async function handleDownload(platform: Platform, event: React.MouseEvent, setSh
     return;
   }
 
-  // Create a temporary anchor element to trigger download
+  // Show the Chrome extension popup immediately when button is clicked
+  setShowPopup(true);
+  
+  // Then trigger the download
   const link = document.createElement('a');
   link.href = downloadUrl;
   link.download = platformData.filename;
@@ -89,9 +92,6 @@ async function handleDownload(platform: Platform, event: React.MouseEvent, setSh
   document.body.appendChild(link);
   link.click();
   document.body.removeChild(link);
-  
-  // Show the Chrome extension popup immediately after triggering download
-  setShowPopup(true);
 }
 
 export default function Download() {
