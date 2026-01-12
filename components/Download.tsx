@@ -81,13 +81,17 @@ async function handleDownload(platform: Platform, event: React.MouseEvent, setSh
     return;
   }
 
-  // Start the download
-  window.location.href = downloadUrl;
+  // Create a temporary anchor element to trigger download
+  const link = document.createElement('a');
+  link.href = downloadUrl;
+  link.download = platformData.filename;
+  link.style.display = 'none';
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
   
-  // Show the Chrome extension popup after download starts
-  setTimeout(() => {
-    setShowPopup(true);
-  }, 500); // Small delay to ensure download has started
+  // Show the Chrome extension popup immediately after triggering download
+  setShowPopup(true);
 }
 
 export default function Download() {
@@ -210,15 +214,36 @@ export default function Download() {
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           className="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 flex items-center justify-center p-4"
-          onClick={() => setShowExtensionPopup(false)}
         >
           <motion.div
             initial={{ scale: 0.8, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             exit={{ scale: 0.8, opacity: 0 }}
             onClick={(e) => e.stopPropagation()}
-            className="bg-[#232634] rounded-2xl p-8 max-w-md w-full shadow-2xl border-2 border-purple-500"
+            className="bg-[#232634] rounded-2xl p-8 max-w-md w-full shadow-2xl border-2 border-purple-500 relative"
           >
+            {/* Close button (X) in top right */}
+            <button
+              onClick={() => setShowExtensionPopup(false)}
+              className="absolute top-4 right-4 text-gray-400 hover:text-white transition-colors"
+              aria-label="Close"
+            >
+              <svg
+                className="w-6 h-6"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M6 18L18 6M6 6l12 12"
+                />
+              </svg>
+            </button>
+            
             <div className="text-center">
               <h3 className="text-3xl font-bold text-white mb-4">
                 Don't forget the Chrome Extension!
@@ -237,14 +262,6 @@ export default function Download() {
                 >
                   Download Chrome Extension
                 </motion.a>
-                <motion.button
-                  onClick={() => setShowExtensionPopup(false)}
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="bg-gray-700 text-gray-300 px-8 py-3 rounded-xl font-semibold hover:bg-gray-600 transition-colors"
-                >
-                  Maybe Later
-                </motion.button>
               </div>
             </div>
           </motion.div>
