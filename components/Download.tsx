@@ -70,7 +70,7 @@ function isFileSystemAccessSupported(): boolean {
 }
 
 // Download handler function
-async function handleDownload(platform: Platform, event: React.MouseEvent) {
+async function handleDownload(platform: Platform, event: React.MouseEvent, setShowPopup: (show: boolean) => void) {
   event.preventDefault();
   
   const platformData = platformInfo[platform];
@@ -81,14 +81,20 @@ async function handleDownload(platform: Platform, event: React.MouseEvent) {
     return;
   }
 
-  // Directly redirect to the download URL
+  // Start the download
   window.location.href = downloadUrl;
+  
+  // Show the Chrome extension popup after download starts
+  setTimeout(() => {
+    setShowPopup(true);
+  }, 500); // Small delay to ensure download has started
 }
 
 export default function Download() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
   const [platform, setPlatform] = useState<Platform>('unknown');
+  const [showExtensionPopup, setShowExtensionPopup] = useState(false);
 
   useEffect(() => {
     setPlatform(detectPlatform());
@@ -126,7 +132,7 @@ export default function Download() {
           className="mb-8"
         >
           <motion.button
-            onClick={(e) => handleDownload(platform, e)}
+            onClick={(e) => handleDownload(platform, e, setShowExtensionPopup)}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             className="block bg-purple-600 text-white px-12 py-6 rounded-2xl text-2xl font-bold shadow-2xl hover:shadow-purple-500/50 transition-shadow mx-auto max-w-md text-center w-full cursor-pointer"
@@ -153,7 +159,7 @@ export default function Download() {
               {otherPlatforms.map(([key, info]) => (
                 <motion.button
                   key={key}
-                  onClick={(e) => handleDownload(key as Platform, e)}
+                  onClick={(e) => handleDownload(key as Platform, e, setShowExtensionPopup)}
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   className="bg-gray-800 text-purple-400 px-6 py-3 rounded-xl font-semibold shadow-lg hover:shadow-xl transition-shadow border-2 border-purple-500 cursor-pointer flex items-center"
@@ -196,6 +202,54 @@ export default function Download() {
         </motion.div>
 
       </div>
+
+      {/* Chrome Extension Popup Modal */}
+      {showExtensionPopup && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          className="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 flex items-center justify-center p-4"
+          onClick={() => setShowExtensionPopup(false)}
+        >
+          <motion.div
+            initial={{ scale: 0.8, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            exit={{ scale: 0.8, opacity: 0 }}
+            onClick={(e) => e.stopPropagation()}
+            className="bg-[#232634] rounded-2xl p-8 max-w-md w-full shadow-2xl border-2 border-purple-500"
+          >
+            <div className="text-center">
+              <h3 className="text-3xl font-bold text-white mb-4">
+                Don't forget the Chrome Extension!
+              </h3>
+              <p className="text-gray-300 mb-6 text-lg">
+                For the best experience, download the LokIn Chrome extension to block websites while you're locked in.
+              </p>
+              <div className="flex flex-col gap-4">
+                <motion.a
+                  href="https://chromewebstore.google.com/detail/lenekmfjkkppkknnjmkidcgneckojcek?utm_source=item-share-cb"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="bg-purple-600 text-white px-8 py-4 rounded-xl font-bold text-lg shadow-lg hover:shadow-purple-500/50 transition-shadow"
+                >
+                  Download Chrome Extension
+                </motion.a>
+                <motion.button
+                  onClick={() => setShowExtensionPopup(false)}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="bg-gray-700 text-gray-300 px-8 py-3 rounded-xl font-semibold hover:bg-gray-600 transition-colors"
+                >
+                  Maybe Later
+                </motion.button>
+              </div>
+            </div>
+          </motion.div>
+        </motion.div>
+      )}
     </section>
   );
 }
