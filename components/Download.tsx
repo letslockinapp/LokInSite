@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion';
 import { useInView } from 'framer-motion';
 import { useRef, useState, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 
 type Platform = 'windows' | 'macos' | 'linux' | 'unknown';
 
@@ -99,9 +100,11 @@ export default function Download() {
   const isInView = useInView(ref, { once: true, margin: "-100px" });
   const [platform, setPlatform] = useState<Platform>('unknown');
   const [showExtensionPopup, setShowExtensionPopup] = useState(false);
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
     setPlatform(detectPlatform());
+    setMounted(true);
   }, []);
 
   const currentPlatform = platformInfo[platform];
@@ -207,13 +210,13 @@ export default function Download() {
 
       </div>
 
-      {/* Chrome Extension Popup Modal */}
-      {showExtensionPopup && (
+      {/* Chrome Extension Popup Modal - Rendered via Portal */}
+      {mounted && showExtensionPopup && createPortal(
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          className="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 flex items-center justify-center p-4"
+          className="fixed inset-0 bg-black/70 backdrop-blur-sm z-[9999] flex items-center justify-center p-4"
         >
           <motion.div
             initial={{ scale: 0.8, opacity: 0 }}
@@ -225,7 +228,7 @@ export default function Download() {
             {/* Close button (X) in top right */}
             <button
               onClick={() => setShowExtensionPopup(false)}
-              className="absolute top-4 right-4 text-gray-400 hover:text-white transition-colors"
+              className="absolute top-4 right-4 text-gray-400 hover:text-white transition-colors z-10"
               aria-label="Close"
             >
               <svg
@@ -265,7 +268,8 @@ export default function Download() {
               </div>
             </div>
           </motion.div>
-        </motion.div>
+        </motion.div>,
+        document.body
       )}
     </section>
   );
